@@ -1,0 +1,35 @@
+version: v1
+server:
+  servlet:
+    context-path: /@project.artifactId@
+springdoc:
+  show-actuator: true
+management:
+  metrics:
+    tags:
+      application: '@project.artifactId@'
+  endpoints:
+    web:
+      exposure:
+        include: health, info,metrics,prometheus, caches
+
+datasource:
+  pgs:
+    jdbcUrl: jdbc:postgresql://${DB_URL}:${PORT}/${DB_NAME}
+    password: ${DB_PASSWORD}
+    username: ${DB_USER}
+    maximum-pool-size: 10
+    minimum-idle: 1
+    connection-timeout: 10000
+    allow-pool-suspension: true
+tweet:
+  channel: tweet-web
+  jwt:
+    secretKey: tweet8713d8ca784f4387a2a37f9fb690bd0csecret
+    expiration-time:  1 #dia
+  apiKey: tweet-1265253a-0237-4d1c-804a-a592343821ef
+logging:
+  level:
+   py.com.mcs.tweet: DEBUG
+
+
