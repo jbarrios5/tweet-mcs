@@ -18,7 +18,7 @@ import py.com.mcs.tweet.service.UserService;
 
 import javax.validation.Valid;
 
-@RequestMapping("user/${version}")
+@RequestMapping("users/${version}")
 @RestController
 public class UserController {
 
