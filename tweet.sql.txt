@@ -1,0 +1,29 @@
+CREATE TABLE public.users (
+    id SERIAL PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
+    user_name VARCHAR(255) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
+-- Índices únicos para asegurar que no se repitan el email y el nombre de usuario
+CREATE UNIQUE INDEX idx_unique_user_name ON public.users (user_name);
+CREATE UNIQUE INDEX idx_unique_email ON public.users (email);
+
+
+CREATE TABLE public.tweets (
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    content VARCHAR(280) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES public.users (id) 
+);
+
+
+CREATE TABLE public.followers (
+    follower_id INT NOT NULL,
+    followed_id INT NOT NULL,
+    PRIMARY KEY (follower_id, followed_id),
+    FOREIGN KEY (follower_id) REFERENCES public.users (id) ,
+    FOREIGN KEY (followed_id) REFERENCES public.users (id) 
+);
