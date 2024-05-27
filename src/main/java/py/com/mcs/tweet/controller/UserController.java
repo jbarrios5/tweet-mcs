@@ -1,5 +1,6 @@
 package py.com.mcs.tweet.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,11 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import py.com.mcs.tweet.bean.user.req.UserPostReqData;
 import py.com.mcs.tweet.bean.user.req.UserPutReqData;
+import py.com.mcs.tweet.bean.user.resp.UserFollowGetResData;
 import py.com.mcs.tweet.bean.user.resp.UserGetResData;
 import py.com.mcs.tweet.bean.user.resp.UserPostResData;
 import py.com.mcs.tweet.bean.user.resp.UserPutResData;
 import py.com.mcs.tweet.constant.TweetConstant;
-import py.com.mcs.tweet.service.UserService;
+import py.com.mcs.tweet.service.user.UserService;
 
 import javax.validation.Valid;
 
@@ -27,6 +29,7 @@ public class UserController {
 
     @GetMapping("/")
     public UserGetResData getUsers(@RequestHeader(value = TweetConstant.ACCESS_TOKEN) String accessToken,
+                                   @RequestHeader(value = TweetConstant.CHANNEL) String channel,
                                    @RequestHeader(value = TweetConstant.API_KEY) String apiKey) {
         return userService.getUsers(accessToken);
     }
@@ -43,5 +46,14 @@ public class UserController {
                                    @RequestHeader(value = TweetConstant.CHANNEL) String channel,
                                    @RequestHeader(value = TweetConstant.API_KEY) String apiKey) {
         return userService.addUser(req.getData());
+    }
+    @GetMapping("/followers")
+    @Operation(description = "Get followers and followed belongs to a  user")
+    public UserFollowGetResData getFollowsAndFollowers(
+                                    @RequestHeader(value = TweetConstant.ACCESS_TOKEN) String accessToken,
+                                    @RequestHeader(value = TweetConstant.CHANNEL) String channel,
+                                    @RequestHeader(value = TweetConstant.API_KEY) String apiKey) {
+
+        return userService.getFollows(accessToken);
     }
 }

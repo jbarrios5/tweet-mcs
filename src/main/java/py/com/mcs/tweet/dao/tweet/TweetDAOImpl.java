@@ -7,7 +7,13 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import py.com.mcs.tweet.bean.interceptor.TraceContextHolder;
+import py.com.mcs.tweet.bean.tweet.resp.TweetGetRes;
 import py.com.mcs.tweet.constant.TweetConstant;
+import py.com.mcs.tweet.dto.FollowerDTO;
+import py.com.mcs.tweet.mapper.FollowerMapper;
+import py.com.mcs.tweet.mapper.TweetGetResMapper;
+
+import java.util.List;
 
 @Repository
 public class TweetDAOImpl implements TweetDAO{
@@ -33,5 +39,10 @@ public class TweetDAOImpl implements TweetDAO{
             log.warn(TweetConstant.LOG_FORMATT, TraceContextHolder.getLogId(), "addFollower: Error", e.getMessage());
             return 0;
         }
+    }
+
+    @Override
+    public List<TweetGetRes> getTweets(String userName) {
+        return jdbcPGS.query(SQLQueries.GET_TWEETS,new Object[]{userName},new TweetGetResMapper());
     }
 }

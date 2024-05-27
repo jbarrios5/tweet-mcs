@@ -1,8 +1,9 @@
-package py.com.mcs.tweet.service;
+package py.com.mcs.tweet.service.user;
 
 
 import py.com.mcs.tweet.bean.user.req.UserPostReq;
 import py.com.mcs.tweet.bean.user.req.UserPutReq;
+import py.com.mcs.tweet.bean.user.resp.UserFollowGetResData;
 import py.com.mcs.tweet.bean.user.resp.UserGetResData;
 import py.com.mcs.tweet.bean.user.resp.UserPostResData;
 import py.com.mcs.tweet.bean.user.resp.UserPutResData;
@@ -16,5 +17,7 @@ public interface UserService {
     UserDTO getUserByUserNameWithPassword(String userName);
 
     UserPostResData addUser(UserPostReq user);
+
+    UserFollowGetResData getFollows(String accessToken);
 
 }

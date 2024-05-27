@@ -14,4 +14,6 @@ public class UserGetRes {
     private String fullName;
     private String userName;
     private String email;
+    private Integer followers;
+    private Integer followed;
 }

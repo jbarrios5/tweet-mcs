@@ -8,12 +8,16 @@ import py.com.mcs.tweet.bean.interceptor.TraceContextHolder;
 import py.com.mcs.tweet.bean.tweet.req.FollowPostRes;
 import py.com.mcs.tweet.bean.tweet.req.FollowerPostResData;
 import py.com.mcs.tweet.bean.tweet.req.TweetPostReq;
+import py.com.mcs.tweet.bean.tweet.resp.TweetGetRes;
+import py.com.mcs.tweet.bean.tweet.resp.TweetGetResData;
 import py.com.mcs.tweet.bean.tweet.resp.TweetPostRes;
 import py.com.mcs.tweet.bean.tweet.resp.TweetPostResData;
 import py.com.mcs.tweet.bean.user.resp.UserGetRes;
 import py.com.mcs.tweet.constant.TweetConstant;
 import py.com.mcs.tweet.dao.tweet.TweetDAO;
 import py.com.mcs.tweet.service.security.JwtService;
+
+import java.util.List;
 
 @Service
 public class TweetServiceImpl implements TweetService{
@@ -51,6 +55,15 @@ public class TweetServiceImpl implements TweetService{
 
         resData.setIsInsertedTweet(isInsertedTweet == 0 ? Boolean.FALSE : Boolean.TRUE );
         resData.setMessage(isInsertedTweet == 0 ? "Error inserting follower" : TweetConstant.FOLLOW_INSERTED_SUCCESS);
+        result.setData(resData);
+        return result;
+    }
+
+    @Override
+    public TweetGetResData getTweetsByUserName(String accessToken, String userName) {
+        TweetGetResData result = new TweetGetResData();
+        UserGetRes userAT = jwtService.isTokenValid(accessToken);
+        List<TweetGetRes> resData = tweetDAO.getTweets(userName) ;
         result.setData(resData);
         return result;
     }

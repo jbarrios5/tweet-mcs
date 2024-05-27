@@ -16,7 +16,7 @@ import py.com.mcs.tweet.constant.TweetConstant;
 import py.com.mcs.tweet.dao.auth.AuthDAO;
 import py.com.mcs.tweet.dto.UserDTO;
 import py.com.mcs.tweet.exceptions.TweetException;
-import py.com.mcs.tweet.service.UserService;
+import py.com.mcs.tweet.service.user.UserService;
 import py.com.mcs.tweet.service.security.JwtService;
 
 import java.util.Objects;

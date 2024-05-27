@@ -13,9 +13,14 @@ import py.com.mcs.tweet.bean.interceptor.TraceContextHolder;
 import py.com.mcs.tweet.bean.user.req.UserPostReq;
 import py.com.mcs.tweet.bean.user.resp.UserGetRes;
 import py.com.mcs.tweet.constant.TweetConstant;
+import py.com.mcs.tweet.dto.FollowedDTO;
+import py.com.mcs.tweet.dto.FollowerDTO;
 import py.com.mcs.tweet.dto.UserDTO;
 import py.com.mcs.tweet.exceptions.TweetException;
+import py.com.mcs.tweet.mapper.FollowedDTOMapper;
+import py.com.mcs.tweet.mapper.FollowerMapper;
 import py.com.mcs.tweet.mapper.UserDTOMapper;
+import py.com.mcs.tweet.mapper.UserGetResDTO;
 
 import java.util.List;
 
@@ -27,8 +32,8 @@ public class UserDAOImpl implements UserDAO {
     private JdbcTemplate jdbcPGS;
 
     @Override
-    public List<UserGetRes> getUsers() {
-        return null;
+    public List<UserGetRes> getUsers(Long userId) {
+        return jdbcPGS.query(SQLQueries.GET_USER,new UserGetResDTO());
     }
 
     @Override
@@ -57,5 +62,13 @@ public class UserDAOImpl implements UserDAO {
         }
         return result > 0;
     }
+    @Override
+    public List<FollowerDTO> getfollowers(Long followedId) {
+        return jdbcPGS.query(SQLQueries.GET_FOLLOWERS,new Object[]{followedId},new FollowerMapper());
+    }
 
+    @Override
+    public List<FollowedDTO> getfollowed(Long followedId) {
+        return jdbcPGS.query(SQLQueries.GET_FOLLOWED,new Object[]{followedId},new FollowedDTOMapper());
+    }
 }
