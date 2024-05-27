@@ -32,4 +32,5 @@ Documentacion:```Swagger-ui para documentar los enpoint ```
 
 
 # SCRIPT SQL
-AL clonar el proyecto usted encontrara el archivo tweet.sql donde es la estructura esperada por el microservicio
+1- AL clonar el proyecto usted encontrara el archivo tweet.sql donde es la estructura esperada por el microservicio
+2- Debe agregar las variables de entorno esperado, eso podra ver en el directorio /src/main/resources/application.yml
