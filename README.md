@@ -21,9 +21,13 @@ Documentacion:```Swagger-ui para documentar los enpoint ```
 # Pasos para poder desplegar localmente
 
 1- Clonar el proyecto
+
 2- installar jdk 11 o jre
+
 3- installar maven
+
 4- compilar con el comando mvn clean install
+
 5- ejecutar el comando java -jar mcs.tweet-0.0.1-SNAPSHOT.jar
 
 
